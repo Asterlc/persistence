@@ -6,7 +6,7 @@ class PlaceListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus lugares"),
+        title: const Text("Meus lugares"),
         actions: <Widget>[
           IconButton(
             onPressed: () {
@@ -16,7 +16,7 @@ class PlaceListWidget extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
+      body: const Center(
         child: CircularProgressIndicator(),
       ),
     );

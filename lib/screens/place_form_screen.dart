@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:persistence/util/imageInput.dart';
 
@@ -10,8 +12,19 @@ class PlaceFormWidget extends StatefulWidget {
 
 class _PlaceFormWidgetState extends State<PlaceFormWidget> {
   final _titleController = TextEditingController();
+  File? _pickedImage;
 
-  void _onSubmit() {}
+  void _selectImage(File pickedImage) {
+      _pickedImage = pickedImage;
+  }
+
+  void _onSubmit() {
+    if (_titleController.text.isEmpty || _pickedImage == null) {
+      return;
+    }
+
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +38,16 @@ class _PlaceFormWidgetState extends State<PlaceFormWidget> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Column(
-                    children: const <Widget>[
-                      TextField(
+                    children: <Widget>[
+                      const TextField(
                         decoration: InputDecoration(
                           labelText: 'Título',
                         ),
                       ),
-                      SizedBox(height: 10),
-                      ImageInputWidget()
+                      const SizedBox(height: 10),
+                      ImageInputWidget(onSelectedImage: _selectImage),
                     ],
                   ),
                 ),
